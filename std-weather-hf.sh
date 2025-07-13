@@ -1,9 +1,11 @@
 #!/bin/sh
 # @author sc
+# @date 7-14/25
 
 # please write the city name in $HOME/.cache/city
-sav_wttr_file=$HOME/.cache/wttr
+sav_weather_file=$HOME/.cache/hf-weather
 sav_city_file=$HOME/.cache/city
+py_script=$SCRIPT_HOME/std-weather-hf.py
 tmp_file=$(mktemp)
 city=""
 
@@ -15,16 +17,15 @@ else
     exit 1
 fi
 
-stat=$(curl -s -o $tmp_file -w "%{http_code}" "wttr.in/${city}?format=%c%t")
-if [ "$stat" -eq 200 ]; then
-    mv "$tmp_file" "$sav_wttr_file"
-    echo "$(cat $sav_wttr_file)" | awk '{print $1$2}'
-    date "+ %s">>$sav_wttr_file
+weather_info=$(python $py_script "$city")
+if [ $? -eq 0 ]; then
+    echo "$weather_info" > "$sav_weather_file"
+    echo $weather_info | awk '{print $1, $2}'
 else
     cur_timestamp=$(date "+%s")
-    old_timestamp=$(cat $sav_wttr_file | awk '{print $3}')
+    old_timestamp=$(date -d "$(cat $sav_weather_file | awk '{print $3}')" "+%s")
     diff=$((cur_timestamp - old_timestamp))
-    weather_info=$(cat $sav_wttr_file | awk '{print $1$2}')
+    weather_info=$(cat $sav_weather_file | awk '{print $1, $2}')
     if [ $diff -gt 3600 ]; then
         valid_time="$((diff / 3600))h ago"
     else
