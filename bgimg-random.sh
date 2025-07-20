@@ -26,22 +26,23 @@ ran=$(( RANDOM % nums + 1 ))
 
 selected=$(find "$dir_path" -maxdepth 1 -type f | sed -n "${ran}p")
 
-if [[ -n $DISPLAY ]]; then
-    # X11 environment
-    if command -v feh &> /dev/null; then
-        feh --bg-fill "$selected"
-        echo "$(date "+%D %X") [INFO]: Set wallpaper to $selected using feh."
-    else
-        echo "$(date "+%D %X") [ERROR]: feh is not installed."
-        exit 1
-    fi
-else
+if [[ $XDG_SESSION_TYPE == wayland ]]; then
     # Wayland environment
     if command -v swaybg &> /dev/null; then
         swaybg -i "$selected" -m fill
         echo "$(date "+%D %X") [INFO]: Set wallpaper to $selected using swaybg."
     else
         echo "$(date "+%D %X") [ERROR]: swaybg is not installed."
+        exit 1
+    fi
+
+else
+    # X11 environment
+    if command -v feh &> /dev/null; then
+        feh --bg-fill "$selected"
+        echo "$(date "+%D %X") [INFO]: Set wallpaper to $selected using feh."
+    else
+        echo "$(date "+%D %X") [ERROR]: feh is not installed."
         exit 1
     fi
 fi
