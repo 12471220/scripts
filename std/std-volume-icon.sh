@@ -7,6 +7,6 @@ status="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
 volume="$(echo $status | sed 's/[^0-9]*//g; s/^0//' )"
 muted="$(echo $status | grep 'MUTED')"
 
-[ -z "$muted" ] && icon="󰕾" || icon="󰸈"
+[ -z "$muted" ] && icon=" " || icon=" "
 
-echo "$icon" "$volume"%
+echo "$icon $volume"%

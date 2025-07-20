@@ -1,12 +1,17 @@
 #!/bin/bash
-# @modified sc
+# @modifier sc
 # @since 2025
 #
 # @require lm-sensors
 
 # -m1: match only the first occurrence
 # -oP: use Perl-compatible regex
-temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed 's/^+//')
+
+# have decimal
+#temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed 's/^+//')
+# have no decimal
+temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed -E 's/^\+?([0-9]+).*/\1/')
+
 
 if (( $(awk "BEGIN {print ($temp < 50)}") )); then
     icon=""

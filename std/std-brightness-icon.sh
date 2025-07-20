@@ -18,4 +18,4 @@ case $level in
     100)    icon="󰛨" ;;
 esac
 
-echo "$icon" "$level%"
+echo "$icon  $level%"
