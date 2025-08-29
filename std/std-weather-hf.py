@@ -232,7 +232,7 @@ def decode_weather(weather_data: dict) -> None:
         info = config['icon_map'][icon_code]
     else:
         info = weather
-    print(f"{info} {temperature}℃  {update_time}")
+    print(f"{info} {temperature}°C  {update_time}")
 
 
 if __name__ == "__main__":

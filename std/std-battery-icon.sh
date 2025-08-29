@@ -25,7 +25,7 @@ case "$status" in
         icon=""
         ;;
     "Charging")
-        icon="$icon ⚡️"
+        icon="$icon 󱐋"
         ;;
     "Full")
         icon="$icon "

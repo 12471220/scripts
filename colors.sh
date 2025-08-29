@@ -5,4 +5,5 @@ color-darkgrey="#444444"
 color-stormyblue="#4c7899"
 color-silver="#dddddd"
 color-neonyellow="#dfff00"
+color-brightgreen="#00ff00"
 
