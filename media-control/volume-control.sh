@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # @author sc
 # @date 2025/07/12
 # @dependents pipewire

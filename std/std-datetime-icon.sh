@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # @author sc
 # @date 2025/07/13
 

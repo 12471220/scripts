@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # @author: sc
 # @date: Jul.13,25
 # @requirements: swaybg(wayland) | feh(x11)

@@ -9,8 +9,9 @@
 
 # have decimal
 #temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed 's/^+//')
+temp="$(($(cat /sys/class/hwmon/hwmon3/temp1_input) / 1000))"
 # have no decimal
-temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed -E 's/^\+?([0-9]+).*/\1/')
+#temp=$(sensors | grep -m1 -oP '\+?\d+(\.\d+)?(?=°C)' | sed -E 's/^\+?([0-9]+).*/\1/')
 
 
 if (( $(awk "BEGIN {print ($temp < 50)}") )); then
